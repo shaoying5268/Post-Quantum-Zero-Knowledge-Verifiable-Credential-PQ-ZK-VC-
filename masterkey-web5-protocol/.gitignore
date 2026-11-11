@@ -1,3 +1,14 @@
 node_modules/
 dist/
 .DS_Store
+
+# Strict Security Protection Rules
+.env
+.env.*
+*.pem
+*.key
+*.dwn.json
+*.sqlite
+*.db
+target/
+secrets/
