@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
-    "packages/*",
-    "contracts"
-  ]
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm --workspace=@masterkey/pq-zkkyc-sdk run build && npm --workspace=@masterkey/web5-dwn-vault run build && npm --workspace=@masterkey/judicial-escrow run build",
+    "test": "node --import tsx --test tests/protocol.security.test.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0"
+  }
 }
