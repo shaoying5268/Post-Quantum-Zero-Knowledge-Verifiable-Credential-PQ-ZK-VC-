@@ -9,8 +9,10 @@ import vcSchema from '../schemas/pq-zkkyc-v1.schema.json' with { type: 'json' };
 const canonicalize = canonicalizeModule as unknown as (input: unknown) => string | undefined;
 
 // Initialize strict W3C VC 2.0 Schema Validator
-const ajv = new Ajv2020({ allErrors: true });
-addFormats(ajv);
+const AjvClass = (Ajv2020 as any).default ?? Ajv2020;
+const ajv = new AjvClass({ allErrors: true });
+const applyFormats = (addFormats as any).default ?? addFormats;
+applyFormats(ajv);
 const validateSchema = ajv.compile(vcSchema);
 
 export interface ZkKycClaims {
@@ -103,6 +105,7 @@ export function issueW3cBlindKycCredential(
 
   const signedCredential: W3CPostQuantumZkKycCredential = {
     ...unsignedCredential,
+    "@context": unsignedCredential["@context"] as ["https://w3.org", "https://masterkey.network"],
     proof: {
       type: 'ML-DSA-65-Signature2026',
       created: now.toISOString(),
