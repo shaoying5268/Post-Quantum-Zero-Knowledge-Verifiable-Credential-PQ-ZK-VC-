@@ -2,7 +2,7 @@
   "name": "@masterkey/pq-zkkyc-sdk",
   "version": "2.0.0",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "./dist/src/index.js",
   "scripts": {
     "build": "tsc",
     "demo": "tsx src/demo.ts"
@@ -17,5 +17,8 @@
   "devDependencies": {
     "tsx": "^4.19.0",
     "typescript": "^5.4.5"
+  },
+  "exports": {
+    ".": "./dist/src/index.js"
   }
 }
