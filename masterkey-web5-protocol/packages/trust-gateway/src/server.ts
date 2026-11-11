@@ -9,7 +9,7 @@ import {
   verifyW3cBlindKycCredential,
   W3CPostQuantumZkKycCredential
 } from '@masterkey/pq-zkkyc-sdk';
-import { generateVaultKeypair, sealIdentityInVault } from '@masterkey/web5-dwn-vault';
+import { generateVaultKeypair, sealIdentityInVault, createRecoveryCommitment, verifyThreeFactorRecovery, ThreeFactorRecoveryCommitment } from '@masterkey/web5-dwn-vault';
 import { JudicialTransparencyLedger } from '@masterkey/judicial-escrow';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

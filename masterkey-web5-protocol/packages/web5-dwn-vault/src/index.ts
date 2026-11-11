@@ -102,3 +102,52 @@ export function saveDwnNode(storageDir: string, envelope: EncryptedDwnEnvelope):
   fs.writeFileSync(filePath, JSON.stringify(envelope, null, 2));
   return filePath;
 }
+
+export interface ThreeFactorRecoveryCommitment {
+  tenFingerCommitmentHash: string;
+  liveFaceCommitmentHash: string;
+  offlineSeedCommitmentHash: string;
+  enrolledFingersCount: number;
+}
+
+/**
+ * Binds all 3 recovery factors (10-finger scan + 3D live face + offline seed phrase)
+ * into quantum-safe SHA3-256 commitments so raw biometrics never leave the user's device.
+ */
+export function createRecoveryCommitment(
+  tenFingerScanVector: string,
+  liveFaceLivenessVector: string,
+  offlineSeedPhrase: string
+): ThreeFactorRecoveryCommitment {
+  return {
+    tenFingerCommitmentHash: bytesToHex(sha3_256(Buffer.from(tenFingerScanVector.trim().toLowerCase(), 'utf8'))),
+    liveFaceCommitmentHash: bytesToHex(sha3_256(Buffer.from(liveFaceLivenessVector.trim().toLowerCase(), 'utf8'))),
+    offlineSeedCommitmentHash: bytesToHex(sha3_256(Buffer.from(offlineSeedPhrase.trim().toLowerCase(), 'utf8'))),
+    enrolledFingersCount: 10
+  };
+}
+
+/**
+ * Verifies all 3 factors simultaneously before granting global cross-device vault recovery.
+ */
+export function verifyThreeFactorRecovery(
+  stored: ThreeFactorRecoveryCommitment,
+  tenFingerInput: string,
+  liveFaceInput: string,
+  offlineSeedInput: string
+): { recovered: boolean; failedFactors: string[] } {
+  const failedFactors: string[] = [];
+
+  const fingerHash = bytesToHex(sha3_256(Buffer.from(tenFingerInput.trim().toLowerCase(), 'utf8')));
+  const faceHash = bytesToHex(sha3_256(Buffer.from(liveFaceInput.trim().toLowerCase(), 'utf8')));
+  const seedHash = bytesToHex(sha3_256(Buffer.from(offlineSeedInput.trim().toLowerCase(), 'utf8')));
+
+  if (fingerHash !== stored.tenFingerCommitmentHash) failedFactors.push('10-Finger Biometric Scan');
+  if (faceHash !== stored.liveFaceCommitmentHash) failedFactors.push('3D Live Face Scan');
+  if (seedHash !== stored.offlineSeedCommitmentHash) failedFactors.push('Offline Seed Phrase');
+
+  return {
+    recovered: failedFactors.length === 0,
+    failedFactors
+  };
+}
