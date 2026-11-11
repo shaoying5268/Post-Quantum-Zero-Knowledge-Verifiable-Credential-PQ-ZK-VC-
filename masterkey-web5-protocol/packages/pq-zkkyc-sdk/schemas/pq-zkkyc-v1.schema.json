@@ -1,0 +1,150 @@
+{
+  "$id": "https://masterkey.network",
+  "title": "W3C Post-Quantum Zero-Knowledge KYC Verifiable Credential",
+  "type": "object",
+  "required": [
+    "@context",
+    "id",
+    "type",
+    "issuer",
+    "validFrom",
+    "validUntil",
+    "credentialSubject",
+    "zkStarkProof",
+    "proof"
+  ],
+  "properties": {
+    "@context": {
+      "type": "array",
+      "contains": {
+        "const": "https://w3.org"
+      },
+      "minItems": 2
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^urn:uuid:"
+    },
+    "type": {
+      "type": "array",
+      "allOf": [
+        {
+          "contains": {
+            "const": "VerifiableCredential"
+          }
+        },
+        {
+          "contains": {
+            "const": "PostQuantumZKKYCCredential"
+          }
+        }
+      ]
+    },
+    "issuer": {
+      "type": "string",
+      "pattern": "^did:"
+    },
+    "validFrom": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "validUntil": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "credentialSubject": {
+      "type": "object",
+      "required": [
+        "id",
+        "claims"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^did:ppid:0x[a-f0-9]{64}$"
+        },
+        "claims": {
+          "type": "object",
+          "required": [
+            "isHumanVerified",
+            "kycComplianceLevel",
+            "isOver18",
+            "sanctionsClearance"
+          ],
+          "properties": {
+            "isHumanVerified": {
+              "type": "boolean",
+              "const": true
+            },
+            "kycComplianceLevel": {
+              "enum": [
+                "TIER_1",
+                "TIER_2",
+                "TIER_3_AML_FULL"
+              ]
+            },
+            "isOver18": {
+              "type": "boolean"
+            },
+            "sanctionsClearance": {
+              "enum": [
+                "PASSED",
+                "FAILED"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "zkStarkProof": {
+      "type": "object",
+      "required": [
+        "circuitId",
+        "publicInputsHash",
+        "proofBlob"
+      ],
+      "properties": {
+        "circuitId": {
+          "type": "string"
+        },
+        "publicInputsHash": {
+          "type": "string",
+          "pattern": "^0x[a-f0-9]{64}$"
+        },
+        "proofBlob": {
+          "type": "string"
+        }
+      }
+    },
+    "proof": {
+      "type": "object",
+      "required": [
+        "type",
+        "created",
+        "verificationMethod",
+        "proofPurpose",
+        "proofValue"
+      ],
+      "properties": {
+        "type": {
+          "const": "ML-DSA-65-Signature2026"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "verificationMethod": {
+          "type": "string"
+        },
+        "proofPurpose": {
+          "const": "assertionMethod"
+        },
+        "proofValue": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

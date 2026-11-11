@@ -1,0 +1,19 @@
+{
+  "name": "@masterkey/trust-gateway",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/server.ts"
+  },
+  "dependencies": {
+    "@masterkey/pq-zkkyc-sdk": "*",
+    "@noble/hashes": "^1.4.0",
+    "@noble/post-quantum": "^0.2.1",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.4.5"
+  }
+}

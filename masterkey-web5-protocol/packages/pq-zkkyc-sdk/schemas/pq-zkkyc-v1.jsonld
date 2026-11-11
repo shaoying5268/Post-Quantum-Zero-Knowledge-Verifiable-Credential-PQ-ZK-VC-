@@ -1,0 +1,22 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@protected": true,
+    "id": "@id",
+    "type": "@type",
+    "PostQuantumZKKYCCredential": "https://masterkey.network",
+    "ML-DSA-65-Signature2026": "https://masterkey.network",
+    "pairwiseAppSubjectId": {
+      "@id": "https://masterkey.network",
+      "@type": "@id"
+    },
+    "claims": {
+      "@id": "https://masterkey.network",
+      "@type": "@json"
+    },
+    "zkStarkProof": {
+      "@id": "https://masterkey.network",
+      "@type": "@json"
+    }
+  }
+}
