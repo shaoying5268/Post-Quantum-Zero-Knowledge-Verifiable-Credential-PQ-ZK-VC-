@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MasterKey Web5 — Quantum Sovereign Super-App</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #090d16; color: #f1f5f9; margin: 0; padding: 1.5rem; }
+    .container { max-width: 1020px; margin: auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 1rem; margin-bottom: 1.25rem; }
+    .badge { background: #0f766e; color: #ccfbf1; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 1.1rem; }
+    h3 { margin-top: 0; color: #38bdf8; }
+    button { background: #2563eb; color: white; border: none; padding: 9px 13px; border-radius: 8px; cursor: pointer; font-weight: 600; margin: 4px 6px 4px 0; }
+    button.danger { background: #dc2626; }
+    button.success { background: #059669; }
+    input { width: 68%; padding: 8px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; }
+    pre { background: #0b0f19; padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-size: 11px; border: 1px solid #1e293b; max-height: 190px; }
+    .item { background: #1e293b; padding: 9px; border-radius: 8px; margin-top: 8px; font-size: 13px; }
+    a { color: #38bdf8; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div>
+      <h1 style="margin:0;">MasterKey Web5 Super-App</h1>
+      <small style="color:#94a3b8;">One Master Key to the Internet • NIST ML-KEM-768 + ML-DSA-65 + W3C VC 2.0</small>
+    </div>
+    <span class="badge">88% Engineered • Live Prototype</span>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <h3>1. Master Key Blind Login (Zero PII)</h3>
+      <button onclick="onboardApp('did:web:global-bank.example')">Login to Global Bank</button>
+      <button onclick="onboardApp('did:web:social-video.example')">Login to Video App</button>
+      <pre id="kycOut">Click a button to mint a pairwise blind credential...</pre>
+    </div>
+    <div class="card">
+      <h3>2. Judicial Warrant & User Consent</h3>
+      <button class="danger" onclick="simulateCourtWarrant()">Simulate Court Warrant</button>
+      <div id="warrantList"></div>
+      <pre id="warrantOut">No active judicial requests.</pre>
+    </div>
+    <div class="card">
+      <h3>3. Verified-Human Global Pulse (Zero Bots)</h3>
+      <input id="postInput" placeholder="Post with hardware proof of humanity..." />
+      <button onclick="publishPost()">Post</button>
+      <div id="feedList"></div>
+    </div>
+    <div class="card">
+      <h3>4. Quantum Chat & Career Ledger</h3>
+      <input id="chatInput" placeholder="Send ML-KEM-768 encrypted chat..." />
+      <button onclick="sendChat()">Send</button>
+      <div id="chatList"></div>
+      <div id="careerList"></div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:#94a3b8;margin-top:1rem;">
+    Endpoints: <a href="/.well-known/did.json">DID Doc</a> • <a href="/contexts/pq-zkkyc-v1.jsonld">JSON-LD</a> • <a href="/schemas/pq-zkkyc-v1.schema.json">JSON Schema</a> • <a href="/api/superapp/vault-status">Encrypted Vault</a>
+  </p>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>
