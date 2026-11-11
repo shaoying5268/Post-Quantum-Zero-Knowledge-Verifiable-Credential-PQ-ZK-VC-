@@ -105,6 +105,7 @@ export function issueW3cBlindKycCredential(
 
   const signedCredential: W3CPostQuantumZkKycCredential = {
     ...unsignedCredential,
+    type: unsignedCredential.type as ["VerifiableCredential", "PostQuantumZKKYCCredential"],
     "@context": unsignedCredential["@context"] as ["https://w3.org", "https://masterkey.network"],
     proof: {
       type: 'ML-DSA-65-Signature2026',
