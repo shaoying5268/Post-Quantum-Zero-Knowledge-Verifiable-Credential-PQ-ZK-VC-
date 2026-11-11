@@ -1,0 +1,22 @@
+{
+  "name": "@masterkey/judicial-escrow",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "demo": "tsx src/demo.ts"
+  },
+  "dependencies": {
+    "@masterkey/web5-dwn-vault": "*",
+    "@noble/hashes": "^1.4.0",
+    "@noble/post-quantum": "^0.2.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.4.5"
+  }
+}
