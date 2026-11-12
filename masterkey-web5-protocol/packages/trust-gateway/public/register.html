@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register & Verify Account — MasterKey</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<nav id="navbar" class="navbar"></nav>
+<div class="container">
+  <div class="card">
+    <span class="pill">ONE-TIME IDENTITY VERIFICATION</span>
+    <h1>Create & Verify Your MasterKey Account</h1>
+    <p class="sub">Verify yourself once to get your personal Master Key. Your real name, ID number, and biometrics stay locked privately inside your own vault—no outside company can ever see them.</p>
+
+    <div class="row">
+      <input id="fullName" placeholder="Your Full Name" />
+      <input id="dob" type="date" value="1995-04-18" />
+      <input id="idNumber" placeholder="National ID or Passport Number" />
+    </div>
+
+    <p class="sub" style="margin-bottom:8px;"><strong>Required 3-Step Recovery Protection (All 3 Needed for Lost Phone Recovery):</strong></p>
+    <div class="row">
+      <button type="button" class="soft" id="fingerBtn" onclick="scanTenFingers()">1. Scan All 10 Fingers (0/10)</button>
+      <button type="button" class="soft" id="faceBtn" onclick="scanLiveFace()">2. Live 3D Face Scan</button>
+      <input id="seedPhrase" value="ocean timber crystal shield quantum horizon liberty anchor pulse vertex orbit falcon" title="Write down these 12 words on paper and keep them offline" />
+    </div>
+
+    <button class="green" onclick="registerAndVerify()">Verify Me & Create My Profile</button>
+    <div id="keyStatus" class="msg" style="display:none;"></div>
+  </div>
+</div>
+<script src="/nav.js"></script>
+<script src="/recovery.js"></script>
+<script>
+  renderNavbar('register');
+  async function registerAndVerify() {
+    const fullName = document.getElementById('fullName').value.trim();
+    const dateOfBirth = document.getElementById('dob').value;
+    const idNumber = document.getElementById('idNumber').value.trim();
+    const seedPhrase = document.getElementById('seedPhrase').value.trim();
+    const box = document.getElementById('keyStatus');
+
+    if (!fullName || !idNumber || !enrolledFingers || !enrolledFace || !seedPhrase) {
+      box.style.display = 'block';
+      box.style.background = '#fef2f2';
+      box.style.borderColor = '#fecaca';
+      box.style.color = '#991b1b';
+      box.innerHTML = '<strong>Please complete every field:</strong> Enter your name, ID number, scan all 10 fingers, complete the live face scan, and confirm your 12-word backup.';
+      return;
+    }
+
+    await fetch('/api/superapp/enroll-recovery', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tenFingersData: enrolledFingers, liveFaceData: enrolledFace, seedPhrase })
+    });
+
+    const res = await fetch('/api/superapp/create-account', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fullName, dateOfBirth, idNumber })
+    });
+    const data = await res.json();
+    localStorage.setItem('mk_user', JSON.stringify(data));
+
+    box.style.display = 'block';
+    box.style.background = '#f0fdf4';
+    box.style.borderColor = '#bbf7d0';
+    box.style.color = '#166534';
+    box.innerHTML = `<strong>Account Verified!</strong> Taking you to your Profile & Vault...`;
+    setTimeout(() => location.href = '/profile.html', 1000);
+  }
+</script>
+</body>
+</html>

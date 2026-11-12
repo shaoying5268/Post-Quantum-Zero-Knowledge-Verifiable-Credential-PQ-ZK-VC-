@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile & Private Vault — MasterKey</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<nav id="navbar" class="navbar"></nav>
+<div class="container">
+  <div class="card" id="profileCard">
+    <span class="pill">VERIFIED IDENTITY PROFILE</span>
+    <h1 id="profileName">Not Verified Yet</h1>
+    <p class="sub" id="profileSub">Please register and verify your account to activate your Master Key.</p>
+    <div id="verifyCta"><a href="/register.html"><button class="green">Verify My Account Now →</button></a></div>
+  </div>
+
+  <div class="card">
+    <span class="pill">1-CLICK SAFE LOGINS</span>
+    <h2>Use Your Master Key on Banks & Websites (Zero Data Shared)</h2>
+    <p class="sub">Open accounts on external services without sharing your real name, ID number, email, or phone.</p>
+    <button onclick="loginWithMasterKey('Global Digital Bank')">Open Bank Account (Zero Data Shared)</button>
+    <button class="soft" onclick="loginWithMasterKey('Video & Social App')">Join Video & Social App (No Email Needed)</button>
+    <a href="/partner-bank.html" style="margin-left:10px;font-size:13px;color:#2563eb;font-weight:600;">Partner Bank Demo →</a>
+    <div id="appLoginStatus" class="msg" style="display:none;"></div>
+  </div>
+
+  <div class="card">
+    <span class="pill">PRIVACY & SAFETY ALERTS</span>
+    <h2>Official Authority Requests (You Are Always Notified)</h2>
+    <p class="sub">No authority can check your account in secret. Any legal request appears here for your review first.</p>
+    <button class="red" onclick="testSafetyAlert()">Test Official Safety Alert</button>
+    <div id="warrantList"></div>
+    <div id="warrantStatus" class="msg" style="display:none;"></div>
+  </div>
+</div>
+<script src="/nav.js"></script>
+<script src="/app.js"></script>
+<script>
+  renderNavbar('profile');
+  const user = JSON.parse(localStorage.getItem('mk_user') || 'null');
+  if (user) {
+    document.getElementById('profileName').innerHTML = `${user.ownerName} <span style="color:#059669;font-size:16px;">✔ Verified Human</span>`;
+    document.getElementById('profileSub').innerHTML = `
+      <strong>Master Key ID:</strong> <code>${user.masterKeyId}</code><br/>
+      <strong>Vault Protection:</strong> 10-Finger Scan + 3D Live Face + 12-Word Offline Backup Active<br/>
+      <strong>Privacy Guarantee:</strong> Your real name and ID stay locked inside your private vault.
+    `;
+    document.getElementById('verifyCta').innerHTML = `<a href="/register.html"><button class="soft">Re-Verify / Update Profile</button></a>`;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log In — MasterKey</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<nav id="navbar" class="navbar"></nav>
+<div class="container">
+  <div class="card">
+    <span class="pill">WELCOME BACK</span>
+    <h1>Log Into Your MasterKey</h1>
+    <p class="sub">No passwords needed. Tap below to unlock your vault with your device fingerprint or face scan.</p>
+    <button class="green" onclick="quickBiometricLogin()">Unlock with Fingerprint / Face ID</button>
+    <a href="/register.html" style="margin-left:12px;font-size:14px;color:#2563eb;font-weight:600;">New here? Create & Verify Account →</a>
+    <div id="loginMsg" class="msg" style="display:none;"></div>
+  </div>
+
+  <div class="card">
+    <span class="pill">LOST DEVICE OR FORGOT ACCESS?</span>
+    <h2>3-Step Global Account Recovery</h2>
+    <p class="sub">To recover your account on a new phone anywhere in the world, you must complete <strong>all 3 safety checks</strong> below.</p>
+    <div class="row">
+      <button type="button" class="soft" id="recFingerBtn" onclick="scanRecoveryFingers()">1. Scan All 10 Fingers</button>
+      <button type="button" class="soft" id="recFaceBtn" onclick="scanRecoveryFace()">2. Live 3D Face Scan</button>
+      <input id="recSeedPhrase" placeholder="3. Enter 12-word paper backup" />
+    </div>
+    <button onclick="recoverLostAccount()">Verify All 3 & Restore Account</button>
+    <div id="recoveryStatus" class="msg" style="display:none;"></div>
+  </div>
+</div>
+<script src="/nav.js"></script>
+<script src="/recovery.js"></script>
+<script>
+  renderNavbar('login');
+  function quickBiometricLogin() {
+    const user = JSON.parse(localStorage.getItem('mk_user') || 'null');
+    const box = document.getElementById('loginMsg');
+    box.style.display = 'block';
+    if (!user) {
+      box.innerHTML = 'No account found on this browser yet. <a href="/register.html"><strong>Click here to Register & Verify first →</strong></a>';
+      return;
+    }
+    box.innerHTML = `<strong>Welcome back, ${user.ownerName}!</strong> Redirecting to your Profile & Vault...`;
+    setTimeout(() => location.href = '/profile.html', 900);
+  }
+</script>
+</body>
+</html>

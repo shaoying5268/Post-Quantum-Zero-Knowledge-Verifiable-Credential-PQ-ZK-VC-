@@ -3,79 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MasterKey — One Safe Pass for Your Entire Digital Life</title>
-  <style>
-    * { box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f3f6fb; color: #1e293b; margin: 0; padding: 1.5rem; }
-    .container { max-width: 860px; margin: auto; }
-    .hero { background: linear-gradient(135deg, #2563eb, #1e3a8a); color: white; padding: 2rem; border-radius: 18px; margin-bottom: 1.5rem; box-shadow: 0 8px 24px rgba(37,99,235,0.18); }
-    .hero h1 { margin: 0 0 0.5rem 0; font-size: 30px; }
-    .hero p { margin: 0 0 1rem 0; font-size: 16px; line-height: 1.5; opacity: 0.95; }
-    .how-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; background: rgba(255,255,255,0.12); padding: 12px; border-radius: 12px; font-size: 13px; }
-    .card { background: white; border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-    .pill { display: inline-block; background: #dbeafe; color: #1d4ed8; font-weight: 700; font-size: 12px; padding: 4px 12px; border-radius: 999px; margin-bottom: 8px; }
-    h2 { margin: 0 0 0.4rem 0; font-size: 20px; color: #0f172a; }
-    .sub { margin: 0 0 1rem 0; color: #475569; font-size: 14px; line-height: 1.5; }
-    .row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-    input { width: 100%; padding: 11px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; }
-    button { background: #2563eb; color: white; border: none; padding: 12px 18px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
-    button:hover { background: #1d4ed8; }
-    button.green { background: #059669; }
-    button.green:hover { background: #047857; }
-    button.soft { background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; }
-    button.red { background: #dc2626; }
-    .msg { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; padding: 12px 14px; border-radius: 10px; margin-top: 12px; font-size: 14px; line-height: 1.5; }
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-    .item { background: #f8fafc; border: 1px solid #e2e8f0; padding: 11px; border-radius: 10px; margin-top: 10px; font-size: 14px; }
-  </style>
+  <title>MasterKey — Social, Private Chat & Verified Work</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
+<nav id="navbar" class="navbar"></nav>
 <div class="container">
-  <div class="hero">
-    <h1>MasterKey — Your One Safe Digital Pass</h1>
-    <p>Stop creating passwords and uploading your ID to dozens of websites. Verify yourself <strong>once</strong> here, lock your personal details in your private vault, and log into banks, social media, and chat apps safely with one click.</p>
-    <div class="how-grid">
-      <div><strong>1. Verify Once:</strong> Lock your ID safely in your own private vault.</div>
-      <div><strong>2. Log In Anywhere:</strong> Join banks & apps without sharing your name or ID.</div>
-      <div><strong>3. Recover Anytime:</strong> Restore your account anywhere using 3 safety checks.</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <span class="pill">STEP 1 • CREATE YOUR ACCOUNT</span>
-    <h2>Verify Yourself & Create Your Master Key</h2>
-    <p class="sub">Fill in your details and complete the 3 safety scans below. Your real information stays locked privately for your eyes only.</p>
-    <div class="row">
-      <input id="fullName" placeholder="Your Full Name" />
-      <input id="dob" type="date" value="1995-04-18" />
-      <input id="idNumber" placeholder="National ID or Passport Number" />
-    </div>
-    <div class="row">
-      <button type="button" class="soft" id="fingerBtn" onclick="scanTenFingers()">Scan All 10 Fingers (0/10)</button>
-      <button type="button" class="soft" id="faceBtn" onclick="scanLiveFace()">Live Face Scan (Tap Here)</button>
-      <input id="seedPhrase" value="ocean timber crystal shield quantum horizon liberty anchor pulse vertex orbit falcon" title="Write down these 12 backup words on paper" />
-    </div>
-    <button class="green" onclick="createMasterKey()">Create My Master Key</button>
-    <div id="keyStatus" class="msg" style="display:none;"></div>
-  </div>
-
-  <div class="card">
-    <span class="pill">STEP 2 • USE YOUR MASTER KEY</span>
-    <h2>Log Into Other Websites Without Sharing Personal Info</h2>
-    <p class="sub">Click a service below. They get proof that you are a real, verified adult—but they <strong>never</strong> receive your name, ID number, email, or phone number.</p>
-    <button onclick="loginWithMasterKey('Global Digital Bank')">Open a Bank Account (Zero Data Shared)</button>
-    <button class="soft" onclick="loginWithMasterKey('Video & Social App')">Join Video & Social App (No Email Needed)</button>
-    <p style="margin-top:12px;font-size:13px;">Are you a bank, business, or website owner? <a href="/partner-bank.html" style="color:#2563eb;font-weight:700;">Test the 1-Click Institution Integration Demo →</a></p>
-    <div id="appLoginStatus" class="msg" style="display:none;"></div>
+  <div class="card" style="background:linear-gradient(135deg,#2563eb,#1e3a8a);color:white;">
+    <h1 style="color:white;">One Safe Key for Your Entire Digital Life</h1>
+    <p style="opacity:0.95;line-height:1.5;">Verify yourself once under <strong>My Profile</strong>, then enjoy bot-free social media, private encrypted chat, and 1-click bank logins with zero personal data shared.</p>
+    <a href="/register.html"><button class="green">Get Started — Register & Verify</button></a>
+    <a href="/login.html"><button class="soft" style="margin-left:8px;">Log In / Recover Account</button></a>
   </div>
 
   <div class="two-col">
     <div class="card">
       <span class="pill">REAL PEOPLE ONLY</span>
       <h2>Social Feed (No Bots or Fake Accounts)</h2>
-      <p class="sub">Every person posting here is verified as a real human.</p>
+      <p class="sub">Every post here is from a verified human.</p>
       <div style="display:flex;gap:8px;">
-        <input id="postInput" placeholder="Write a post..." />
+        <input id="postInput" placeholder="Share something with real people..." />
         <button onclick="publishPost()">Post</button>
       </div>
       <div id="feedList"></div>
@@ -86,37 +33,16 @@
       <h2>Private Messages & Work Profile</h2>
       <p class="sub">Your messages are locked so only you and your friend can read them.</p>
       <div style="display:flex;gap:8px;">
-        <input id="chatInput" placeholder="Type a private message..." />
+        <input id="chatInput" placeholder="Write a private message..." />
         <button onclick="sendChat()">Send</button>
       </div>
       <div id="chatList"></div>
       <div id="careerList"></div>
     </div>
   </div>
-
-  <div class="card">
-    <span class="pill">STEP 3 • LOST PHONE RECOVERY</span>
-    <h2>Recover Your Account Anywhere in the World</h2>
-    <p class="sub">Lost your phone or got a new device? Complete <strong>all 3 safety checks</strong> below to unlock your Master Key.</p>
-    <div class="row">
-      <button type="button" class="soft" id="recFingerBtn" onclick="scanRecoveryFingers()">1. Scan All 10 Fingers</button>
-      <button type="button" class="soft" id="recFaceBtn" onclick="scanRecoveryFace()">2. Live Face Scan</button>
-      <input id="recSeedPhrase" placeholder="3. Type your 12-word paper backup" />
-    </div>
-    <button onclick="recoverLostAccount()">Recover My Account</button>
-    <div id="recoveryStatus" class="msg" style="display:none;"></div>
-  </div>
-
-  <div class="card">
-    <span class="pill">PRIVACY GUARANTEE</span>
-    <h2>Official Safety Alerts (No Secret Tracking)</h2>
-    <p class="sub">Even government authorities cannot check your account in secret. If a legal request ever arrives, you get an alert right here first.</p>
-    <button class="red" onclick="testSafetyAlert()">Test Safety Alert</button>
-    <div id="warrantList"></div>
-    <div id="warrantStatus" class="msg" style="display:none;"></div>
-  </div>
 </div>
+<script src="/nav.js"></script>
 <script src="/app.js"></script>
-<script src="/recovery.js"></script>
+<script>renderNavbar('home');</script>
 </body>
 </html>
