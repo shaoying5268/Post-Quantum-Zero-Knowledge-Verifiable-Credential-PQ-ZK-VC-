@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  masterkey-gateway:
+    build: .
+    container_name: masterkey-web5-node
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - TRUST_ANCHOR_DOMAIN=masterkey.network
+    volumes:
+      - ./dwn-storage:/app/dwn-storage

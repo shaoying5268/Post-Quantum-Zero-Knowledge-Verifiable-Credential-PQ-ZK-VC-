@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner Bank Demo — Powered by MasterKey</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8fafc; color: #0f172a; margin: 0; padding: 2rem; }
+    .box { max-width: 680px; margin: auto; background: white; padding: 2rem; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
+    .tag { background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+    pre { background: #0f172a; color: #e2e8f0; padding: 1rem; border-radius: 10px; font-size: 12px; overflow-x: auto; }
+    .ok { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; padding: 1rem; border-radius: 10px; margin-top: 1rem; display: none; }
+  </style>
+</head>
+<body>
+<div class="box">
+  <span class="tag">EXTERNAL INSTITUTION DEMO</span>
+  <h1>Ceylon & Global Digital Bank</h1>
+  <p>Open a fully verified bank account in <strong>1 click</strong> using your MasterKey. No ID forms, no passport uploads, and zero personal data stored on our servers.</p>
+
+  <div id="masterkey-login-slot"></div>
+  <div id="bankResult" class="ok"></div>
+
+  <hr style="margin:2rem 0;border:none;border-top:1px solid #e2e8f0;" />
+  <h3>For Banks & Websites: Integrate in 2 Lines of Code</h3>
+  <p style="font-size:14px;color:#475569;">Any institution can paste this snippet onto their website to accept MasterKey users immediately:</p>
+  <pre>&lt;div id="masterkey-login-slot"&gt;&lt;/div&gt;
+&lt;script src="https://masterkey.network"&gt;&lt;/script&gt;
+&lt;script&gt;
+  MasterKeyConnect.renderButton('masterkey-login-slot', {
+    institutionDid: 'did:web:your-bank-or-app.com',
+    institutionName: 'Your Bank Name',
+    onSuccess: (account) =&gt; console.log('Verified Customer:', account)
+  });
+&lt;/script&gt;</pre>
+  <p><a href="/" style="color:#2563eb;font-weight:600;">← Back to MasterKey Consumer App</a></p>
+</div>
+
+<script src="/masterkey-connect.js"></script>
+<script>
+  MasterKeyConnect.renderButton('masterkey-login-slot', {
+    institutionDid: 'did:web:ceylon-global-bank.example',
+    institutionName: 'Ceylon & Global Digital Bank',
+    onSuccess: (account) => {
+      const box = document.getElementById('bankResult');
+      box.style.display = 'block';
+      box.innerHTML = `
+        <strong>Bank Account Opened Instantly!</strong><br/>
+        • <strong>KYC Compliance:</strong> Verified (${account.complianceTier})<br/>
+        • <strong>Anonymous Customer ID:</strong> <code>${account.anonymousCustomerId}</code><br/>
+        • <strong>Customer Data Stored by Bank:</strong> ${account.piiStored}
+      `;
+    }
+  });
+</script>
+</body>
+</html>
